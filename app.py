@@ -6,8 +6,10 @@ import time
 import pandas as pd
 import numpy as np
 from PIL import Image
+from tensorflow.keras import models
+import tempfile
 
-BASE_URI = 'https://http://0.0.0.0:8000/images'
+BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'
 
 #Functions
 
@@ -20,11 +22,18 @@ st.title("Upload + Classification Example")
 
 uploaded_file = st.file_uploader("Choose an image...", type="jpg")
 if uploaded_file is not None:
-    data = uploaded_file.read()
-    image = Image.open(data)
-    st.image(image, caption='Uploaded Image.', use_column_width=True)
-    st.write("")
+    image = Image.open(uploaded_file)
+    st.image(image, caption='Uploaded Image', use_column_width=True)
+    
+    files = {'file':uploaded_file.getvalue()
+            }
+
+    response = requests.post(
+        BASE_URL,
+        files=files
+    )
+
+    # st.write("")
     st.write("Classifying...")
-    label = predict(uploaded_file)
-    st.write('%s (%.2f%%)' % (label[1], label[2]*100))
+    st.write(response.json()['Guess'])
 
