@@ -9,7 +9,8 @@ from PIL import Image
 from tensorflow.keras import models
 import tempfile
 
-BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'
+#BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
+BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 
 #Functions
 
