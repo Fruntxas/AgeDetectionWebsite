@@ -2,3 +2,4 @@ streamlit
 pandas
 Pillow
 tensorflow
+opencv-python3
