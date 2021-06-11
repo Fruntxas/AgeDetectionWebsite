@@ -1,4 +1,6 @@
 streamlit
 pandas
 Pillow
-
+Flask==1.0.2
+Keras==2.1.5
+tensorflow==1.7.0
