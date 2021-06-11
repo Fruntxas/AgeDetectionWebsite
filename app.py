@@ -36,5 +36,6 @@ if uploaded_file is not None:
     # st.write("")
     st.write("Classifying...")
     st.write(response.json()['Guess'])
+    st.balloons()
 
 
