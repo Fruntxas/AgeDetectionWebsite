@@ -13,11 +13,6 @@ import cv2
 #BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
 BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 
-WEBRTC_CLIENT_SETTINGS = ClientSettings(
-    rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-    media_stream_constraints={"video": True, "audio": True},
-)
-
 
 #Page Layout
 
@@ -48,7 +43,14 @@ with col3:
 
 st.title("Webcam Live Feed")
 
-webrtc_streamer(key="example")
+webrtc_streamer(
+    client_settings=ClientSettings(
+        rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+        media_stream_constraints={"video": True, "audio": False},
+    ),
+    video_transformer_factory=NeuralStyleTransferTransformer,
+    key="neural-style-transfer",
+)
 
 
 
