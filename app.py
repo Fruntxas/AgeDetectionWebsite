@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_webrtc import webrtc_streamer
 import streamlit.components.v1 as components
 import datetime
 import requests
@@ -42,15 +43,20 @@ with col3:
 
 
 st.title("Webcam Live Feed")
-run = st.checkbox('Run')
-FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(0)
 
-while run:
-    _, frame = camera.read()
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    FRAME_WINDOW.image(frame)
-else:
-    st.write('Stopped')
+webrtc_streamer(key="example")
+
+
+
+# run = st.checkbox('Run')
+# FRAME_WINDOW = st.image([])
+# camera = cv2.VideoCapture(0)
+
+# while run:
+#     _, frame = camera.read()
+#     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#     FRAME_WINDOW.image(frame)
+# else:
+#     st.write('Stopped')
 
 
