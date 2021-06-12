@@ -6,7 +6,6 @@ import time
 import pandas as pd
 import numpy as np
 from PIL import Image
-from tensorflow.keras import models
 import tempfile
 import cv2
 
