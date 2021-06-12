@@ -1,5 +1,4 @@
 pandas
 Pillow
-numpy==1.18.5
-streamlit==0.61.0
-opencv-python==4.2.0.34
+streamlit
+opencv-python-headless
