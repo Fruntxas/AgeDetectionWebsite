@@ -4,3 +4,4 @@ streamlit
 opencv-python-headless
 streamlit-webrtc==0.6.3
 PyArrow
+autocrop

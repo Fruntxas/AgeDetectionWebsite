@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, ClientSettings, VideoTransformerBase
+from streamlit_webrtc import webrtc_streamer, ClientSettings
 import streamlit.components.v1 as components
 import datetime
 import requests
@@ -9,6 +9,7 @@ import numpy as np
 from PIL import Image
 import tempfile
 import cv2
+from autocrop import Cropper
 
 #BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
 BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
@@ -18,40 +19,65 @@ BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 
 st.set_page_config(layout="wide")
 '''# Age Detection!'''
-col1, col2= st.beta_columns((1, 1))
+col1, col2, col3, col4= st.beta_columns((4, 1,1,1))
 
-with col1:
-    st.title("Upload an Image")
-    uploaded_file = st.file_uploader("", type="jpg")
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        st.image(image, caption='Uploaded Image', width=300)
+st.sidebar.markdown(f"""
+    # Choose your Option:
+    """)
 
-        files = {'file':uploaded_file.getvalue()
-                }
+option = st.sidebar.selectbox('', ['Upload an Image', 'Webcam Feed'])
+
+if option == 'Upload an Image':
+    with col1:
+        st.title("Upload an Image")
+        uploaded_file = st.file_uploader("", type="jpg")
+
+
+        if uploaded_file is not None:
+            with open("tmp.png", "wb+") as data:
+                data.write(uploaded_file.read())
+
+            st.write('Uploaded Image')
+            image_normal = Image.open(uploaded_file)
+            st.image(image_normal, caption='', width=300)
+
+            st.write('Cropped Image')
+            cropper = Cropper(width=100, height=100)
+            # Get a Numpy array of the cropped image
+            cropped_array = cropper.crop("tmp.png")
+            # Save the cropped image with PIL
+            cropped_image = Image.fromarray(cropped_array)
+            cropped_image.save('cropped.png')
+            image_cropped = Image.open('cropped.png')
+            st.image(image_cropped, caption='', use_column_width=False)
+
+
+            files = {'file':uploaded_file.getvalue()
+                    }
+
+
+else:
+    with col1:
+        st.title("Webcam Live Feed")
+        webrtc_streamer(
+            client_settings=ClientSettings(
+                rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+                media_stream_constraints={"video": True, "audio": False},
+            ),
+            key="WebcamFeed",
+        )
+
+
+with col3:
+    if st.button('Predict the Age!'):
 
         response = requests.post(
             BASE_URL,
             files=files
         )
-
-with col2:
-    st.title("Webcam Live Feed")
-    webrtc_streamer(
-        client_settings=ClientSettings(
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            media_stream_constraints={"video": True, "audio": False},
-        ),
-        key="WebcamFeed",
-    )
-
-    #ctx.video_transformer.set_width(WIDTH)
-
-
-if st.button('Predict the Age!'):
-    st.write("Thinking...")
-    st.write(response.json()['Guess'])
-    st.balloons()
+        st.write("Thinking...")
+        st.write(response.json()['Guess'])
+        st.balloons()
 
 
 
