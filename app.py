@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer
+from streamlit_webrtc import webrtc_streamer, ClientSettings, VideoTransformerBase
 import streamlit.components.v1 as components
 import datetime
 import requests
@@ -34,6 +34,17 @@ with col1:
             files=files
         )
 
+    st.title("Webcam Live Feed")
+    webrtc_streamer(
+        client_settings=ClientSettings(
+            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+            media_stream_constraints={"video": True, "audio": False},
+        ),
+        key="WebcamFeed",
+    )
+
+    #ctx.video_transformer.set_width(WIDTH)
+
 with col3:
     if st.button('Predict the Age!'):
         st.write("Thinking...")
@@ -41,16 +52,9 @@ with col3:
         st.balloons()
 
 
-st.title("Webcam Live Feed")
 
-webrtc_streamer(
-    client_settings=ClientSettings(
-        rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-        media_stream_constraints={"video": True, "audio": False},
-    ),
-    video_transformer_factory=NeuralStyleTransferTransformer,
-    key="neural-style-transfer",
-)
+
+
 
 
 
