@@ -12,7 +12,7 @@ import tempfile
 #from autocrop import Cropper
 
 #BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
-BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app'   #Felix
+BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 
 
 #Page Layout
