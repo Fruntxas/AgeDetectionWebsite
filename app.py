@@ -17,7 +17,7 @@ BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 #Page Layout
 
 st.set_page_config(layout="wide")
-'''# Age Detection'''
+'''# Age Detection!'''
 col1, col2,col3,col4= st.beta_columns((3, 1,1,1))
 
 with col1:
