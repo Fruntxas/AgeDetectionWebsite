@@ -1,7 +1,7 @@
 pandas
 Pillow
 streamlit
-opencv-python-headless
+opencv-python
 streamlit-webrtc==0.6.3
 PyArrow
-autocrop
+autocro
