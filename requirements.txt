@@ -3,3 +3,4 @@ Pillow
 streamlit
 opencv-python-headless
 streamlit_webrtc
+PyArrow
