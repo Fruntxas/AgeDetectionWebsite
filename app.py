@@ -8,7 +8,6 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 import tempfile
-import cv2
 from autocrop import Cropper
 
 #BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
