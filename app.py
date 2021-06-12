@@ -75,8 +75,10 @@ with col3:
             BASE_URL,
             files=files
         )
-        st.write("Thinking...")
-        st.write(response.json()['Guess'])
+        st.write("Your age is between: ")
+        st.write(response.json()['Initial Age Bin'])
+        st.write('And we think you look like:')
+        st.write(response.json()['Weighted Guess'])
         st.balloons()
 
 
