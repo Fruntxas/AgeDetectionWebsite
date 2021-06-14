@@ -3,4 +3,5 @@ Pillow
 streamlit
 streamlit-webrtc==0.6.3
 PyArrow
+autocrop
 
