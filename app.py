@@ -9,10 +9,11 @@ import numpy as np
 from PIL import Image
 import tempfile
 # import cv2
-from autocrop import Cropper
+# from autocrop import Cropper
 
-#BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
-BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
+BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
+BASE_URL = "127.0.0.1:8000/image"
+# BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 
 
 #Page Layout
@@ -41,15 +42,15 @@ if option == 'Upload an Image':
             image_normal = Image.open(uploaded_file)
             st.image(image_normal, caption='', width=300)
 
-            st.write('Cropped Image')
-            cropper = Cropper(width=100, height=100)
+            # st.write('Cropped Image')
+            # cropper = Cropper(width=100, height=100)
             # Get a Numpy array of the cropped image
-            cropped_array = cropper.crop("tmp.png")
+            # cropped_array = cropper.crop("tmp.png")
             # Save the cropped image with PIL
-            cropped_image = Image.fromarray(cropped_array)
-            cropped_image.save('cropped.png')
-            image_cropped = Image.open('cropped.png')
-            st.image(image_cropped, caption='', use_column_width=False)
+            # cropped_image = Image.fromarray(cropped_array)
+            # cropped_image.save('cropped.png')
+            # image_cropped = Image.open('cropped.png')
+            # st.image(image_cropped, caption='', use_column_width=False)
 
 
             files = {'file':uploaded_file.getvalue()
@@ -76,7 +77,7 @@ with col3:
             files=files
         )
         st.write("Thinking...")
-        st.write(response.json()['Guess'])
+        st.write(response.json()['Weighted Guess'])
         st.balloons()
 
 
