@@ -9,8 +9,9 @@ from PIL import Image
 import tempfile
 from autocrop import Cropper
 
-#BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
-BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
+BASE_URL = 'https://agedetection-tyxhjmug3a-ew.a.run.app/image'  #Tiago
+BASE_URL = "127.0.0.1:8000/image"
+# BASE_URL = 'https://agedetection-m2ianlcoya-ew.a.run.app/image'   #Felix
 
 #Page Layout
 
@@ -25,7 +26,6 @@ with col2:
 
     st.markdown("<h1 style='text-align: center;'>1) Upload an Image!</h1>", unsafe_allow_html=True)
     uploaded_file = st.file_uploader("", type="jpg")
-
 
     if uploaded_file is not None:
         with open("tmp.png", "wb+") as data:
@@ -51,10 +51,6 @@ if files != None:
         m = st.markdown("""
         <style>
         div.stButton > button:first-child {
-
-            width: 100%;
-            height: 80px;
-            flex-direction: column;}
 
         </style>""", unsafe_allow_html=True)
 
